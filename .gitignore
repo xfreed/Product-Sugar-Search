@@ -20,7 +20,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-
+/Sugar-Barcode-Scan/.expo
 # Gradle
 /build/
 /packages/react-native-codegen/android/build/
