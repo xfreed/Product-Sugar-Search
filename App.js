@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import FindBarcode from "./components/Seaching/SeachingMachine"
+import FindBarcode from "./components/SeachingMachine"
 export default function App() {
 
   const [hasPermission, setHasPermission] = useState(null);
@@ -17,7 +17,9 @@ export default function App() {
   const handleBarCodeScanned = ({ type, data }) => {
     console.log(data);
     setScanned(true);
+    (async () => {
     FindBarcode(data);
+    })();
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
