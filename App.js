@@ -1,5 +1,6 @@
+const { Component } = require("react");
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Animated, Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import FindBarcode from "./components/SeachingMachine"
 export default function App() {
@@ -8,17 +9,26 @@ export default function App() {
   const [scanned, setScanned] = useState(true);
 
   useEffect(() => {
+    // FindBarcode("5000328160283");
+
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
+      var a = await FindBarcode("5000328160283");
+      console.log(a);
+
     })();
+    // async function fetchData() {
+
+    // }
+    // fetchData();
   }, []);
 
   const handleBarCodeScanned = ({ type, data }) => {
     console.log(data);
     setScanned(true);
     (async () => {
-    FindBarcode(data);
+      FindBarcode(data);
     })();
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
@@ -45,6 +55,16 @@ export default function App() {
         alignItems: "center",
       }}
     >
+      <Animated.View style={{
+        position: 'absolute',
+        top: 120,
+        left: 100,
+        height: 50,
+        width: 50,
+        borderWidth: 1
+      }} onPress={Animated.ValueXY({ x: 10, y: 450 })}>
+        <Text>Yep</Text>
+      </Animated.View>
       {!scanned ?
         <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
